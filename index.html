@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SnippetStream Lite</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Fira Code for code blocks, Syne for headings, DM Sans for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ─── HEADER ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">&#9654;&#95;</span>
+        <span class="logo-text">SnippetStream <em>Lite</em></span>
+      </div>
+      <div class="header-meta">
+        <span id="snippet-count-badge">0 snippets</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── MAIN LAYOUT ──────────────────────────────────────────── -->
+  <main class="layout">
+
+    <!-- LEFT PANEL: Create + Search -->
+    <aside class="panel panel-left">
+
+      <!-- Search Box -->
+      <section class="widget search-widget">
+        <label class="widget-label" for="search-input">&#128269; Search</label>
+        <input
+          type="text"
+          id="search-input"
+          class="input"
+          placeholder="title, language, or tag…"
+          autocomplete="off"
+        />
+        <!-- Live filter result count -->
+        <p class="search-hint" id="search-hint"></p>
+      </section>
+
+      <!-- Filter by Language -->
+      <section class="widget filter-widget">
+        <label class="widget-label">Filter by Language</label>
+        <div class="lang-pills" id="lang-pills">
+          <!-- Injected by JS -->
+        </div>
+      </section>
+
+      <!-- Create Snippet Form -->
+      <section class="widget create-widget">
+        <h2 class="widget-title">+ New Snippet</h2>
+
+        <label class="form-label" for="input-title">Title</label>
+        <input type="text" id="input-title" class="input" placeholder="e.g. Debounce function" maxlength="80"/>
+
+        <label class="form-label" for="input-language">Language</label>
+        <select id="input-language" class="input select-input">
+          <option value="">— select —</option>
+          <option>JavaScript</option>
+          <option>TypeScript</option>
+          <option>Python</option>
+          <option>Rust</option>
+          <option>Go</option>
+          <option>HTML</option>
+          <option>CSS</option>
+          <option>SQL</option>
+          <option>Bash</option>
+          <option>Java</option>
+          <option>C++</option>
+          <option>PHP</option>
+          <option>Ruby</option>
+          <option>Swift</option>
+          <option>Kotlin</option>
+          <option>Other</option>
+        </select>
+
+        <label class="form-label" for="input-tags">Tags <span class="form-hint">(comma-separated)</span></label>
+        <input type="text" id="input-tags" class="input" placeholder="e.g. utils, async, DOM"/>
+
+        <label class="form-label" for="input-code">Code</label>
+        <textarea id="input-code" class="input code-input" rows="10" placeholder="// paste your code here…" spellcheck="false"></textarea>
+
+        <button id="btn-submit" class="btn btn-primary">Publish Snippet</button>
+        <!-- Edit mode save/cancel -->
+        <div id="edit-actions" class="edit-actions hidden">
+          <button id="btn-save-edit" class="btn btn-primary">Save Changes</button>
+          <button id="btn-cancel-edit" class="btn btn-ghost">Cancel</button>
+        </div>
+
+        <p class="form-error hidden" id="form-error">Please fill in title, language, and code.</p>
+      </section>
+
+    </aside>
+
+    <!-- RIGHT PANEL: Feed -->
+    <section class="panel panel-right">
+      <div class="feed-header">
+        <h2 class="feed-title">Live Feed</h2>
+        <div class="sort-tabs">
+          <button class="sort-btn active" data-sort="newest">Newest</button>
+          <button class="sort-btn" data-sort="top">Top Voted</button>
+        </div>
+      </div>
+
+      <!-- Snippet cards injected here -->
+      <div id="feed" class="feed"></div>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon">&#128196;</div>
+        <p>No snippets yet. Be the first to share one!</p>
+      </div>
+
+      <!-- No search results -->
+      <div id="no-results" class="empty-state hidden">
+        <div class="empty-icon">&#128270;</div>
+        <p>No snippets match your search.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── COPY SUCCESS TOAST ──────────────────────────────────── -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
